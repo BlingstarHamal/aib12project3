@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        당뇨병 예측해보기
+    </title>
+</head>
+<body>
+    <div class="login">
+        <h1>당뇨병 예측하기</h1>
+        <form action="{{ url_for('predict')}}"method="post">
+        
+        <p>성별
+        <input class="form-check-input" type="radio" name="name" value="1" checked>
+        <label class="form-check-label" >남성</label>
+        <input class="form-check-input" type="radio" name="name" value="2">
+        <label class="form-check-label" >여성</label>
+        </p>
+
+        <p>만나이 
+        <span class="input-group-text" id="basic-addon1">만</span>
+        <input type="text" name="age" placeholder="숫자입력" aria-describedby="basic-addon1" required="required">
+        <span class="input-group-text" id="basic-addon1">세</span>
+        </p>
+    
+        <p>월평균수입
+        <input class="form-check-input" type="radio" name="income" value="1">
+        <label class="form-check-label" >50만원미만</label>
+        <input class="form-check-input" type="radio" name="income" value="2">
+        <label class="form-check-label" >50-100만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="3" checked>
+        <label class="form-check-label" >100-150만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="4">
+        <label class="form-check-label" >150-200만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="5">
+        <label class="form-check-label" >200-300만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="6">
+        <label class="form-check-label">300-400만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="7">
+        <label class="form-check-label">400-600만원 미만</label>
+        <input class="form-check-input" type="radio" name="income" value="8">
+        <label class="form-check-label">600만원 이상</label>
+        </p>
+
+        <p>현재결혼상태
+            <input class="form-check-input" type="radio" name="marry" value="1" checked>
+            <label class="form-check-label" >미혼</label>
+            <input class="form-check-input" type="radio" name="marry" value="2">
+            <label class="form-check-label" >기혼</label>
+            <input class="form-check-input" type="radio" name="marry" value="3">
+            <label class="form-check-label" >별거</label>
+            <input class="form-check-input" type="radio" name="marry" value="4">
+            <label class="form-check-label" >이혼</label>
+            <input class="form-check-input" type="radio" name="marry" value="5">
+            <label class="form-check-label" >사별</label>
+            <input class="form-check-input" type="radio" name="marry" value="6">
+            <label class="form-check-label" >기타</label>
+        </p>
+
+        <p> 아버지 고혈압 진단 여부
+            <input class="form-check-input" type="radio" name="fb" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="fb" value="2">
+            <label class="form-check-label" >예</label>
+        </p>
+
+        <p> 어머니 고혈압 진단 여부
+            <input class="form-check-input" type="radio" name="mb" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="mb" value="2">
+            <label class="form-check-label" >예</label>
+        </p>
+
+        <p> 아버지 당뇨병 진단 여부
+            <input class="form-check-input" type="radio" name="fd" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="fd" value="2">
+            <label class="form-check-label" >예</label>
+        </p>
+
+        <p> 어머니 당뇨병 진단 여부
+            <input class="form-check-input" type="radio" name="md" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="md" value="2">
+            <label class="form-check-label" >예</label>
+        </p>
+
+        <p> 음주여부
+            <input class="form-check-input" type="radio" name="al" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="al" value="2">
+            <label class="form-check-label" >예(과거 음주경험 있음)</label>
+            <input class="form-check-input" type="radio" name="al" value="3" >
+            <label class="form-check-label" >예(현재 음주)</label>
+        </p>
+
+        <p> 총음주기간
+            <input class="form-check-input" type="radio" name="all" value="1">
+            <label class="form-check-label" >5년이하</label>
+            <input class="form-check-input" type="radio" name="all" value="2">
+            <label class="form-check-label" >6-10년</label>
+            <input class="form-check-input" type="radio" name="all" value="3">
+            <label class="form-check-label" >11-20년</label>
+            <input class="form-check-input" type="radio" name="all" value="4">
+            <label class="form-check-label" >21년이상</label>
+            <input class="form-check-input" type="radio" name="all" value="0" checked>
+            <label class="form-check-label" >음주경험없음</label>
+        </p>
+
+        <p> 흡연여부
+            <input class="form-check-input" type="radio" name="sm" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="sm" value="2">
+            <label class="form-check-label" >예(과거 흡연경험 있음)</label>
+            <input class="form-check-input" type="radio" name="sm" value="3" >
+            <label class="form-check-label" >예(현재 흡연)</label>
+        </p>
+
+        <p>총흡연기간(년)
+            <input type="text" name="smy" required="required" value="0">
+            <span class="input-group-text">년</span>
+        </p>
+
+        <p>하루흡연량(개비)
+            <input type="text" name="smm" required="required" value="0">
+            <span class="input-group-text">개비</span>
+        </p>
+
+        <p> 간접흡연 여부
+            <input class="form-check-input" type="radio" name="sms" value="1" checked>
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="sms" value="2">
+            <label class="form-check-label" >예</label>
+        </p>
+
+        <p> 규칙적인 운동여부(몸에땀이날정도)
+            <input class="form-check-input" type="radio" name="hd" value="1" checked>
+            <label class="form-check-label" >안한다</label>
+            <input class="form-check-input" type="radio" name="hd" value="2">
+            <label class="form-check-label" >한다</label>
+        </p>
+
+        <p> 폐경여부
+            <input class="form-check-input" type="radio" name="ep" value="1">
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="ep" value="2">
+            <label class="form-check-label" >예</label>
+            <input class="form-check-input" type="radio" name="ep" value="0" checked >
+            <label class="form-check-label" >관계없음(남성)</label>
+        </p>
+
+        <p> 임신경험여부
+            <input class="form-check-input" type="radio" name="pe" value="1">
+            <label class="form-check-label" >아니오</label>
+            <input class="form-check-input" type="radio" name="pe" value="2">
+            <label class="form-check-label" >예</label>
+            <input class="form-check-input" type="radio" name="pe" value="0" checked >
+            <label class="form-check-label" >관계없음(남성)</label>
+        </p>
+
+        <p>허리둘레(cm)
+            <input type="text" name="wl" required="required" value="80">
+            <span class="input-group-text">cm</span>
+        </p>
+
+        <p>엉덩이둘레(cm)
+            <input type="text" name="hl" required="required" value="93">
+            <span class="input-group-text">cm</span>
+        </p>
+
+        <p>신장(cm)
+            <input type="text" name="t" required="required" value="165">
+            <span class="input-group-text">cm</span>
+        </p>
+
+        <p>몸무게(kg)
+            <input type="text" name="f" required="required" value="65">
+            <span class="input-group-text">kg</span>
+        </p>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+</form>
+
+<br>
+<br>
+{{ prediction_text }}
+</div>
+
+</body>
+</html>
+
+
